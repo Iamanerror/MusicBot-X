@@ -1,21 +1,17 @@
 {
-  "name": "sirgroove",
+  "name": "Blackfox",
   "version": "0.4.0",
   "description": "Music bot for Discord",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bananaprotocol/sirgroove.git"
-  },
   "keywords": [
     "discord",
     "bot",
     "music"
   ],
-  "author": "bananaprotocol",
+  "author": "biswajit",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^11.3.2",
