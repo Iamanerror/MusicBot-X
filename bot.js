@@ -131,7 +131,7 @@ function searchVideo(query, callback) {
   encodeURIComponent(query) + '&key=' + youtubeAPIKey,
   function (error, response, body) {
     var json = JSON.parse(body);
-    if (!json.items[0]) {
+    if (!json.items[1]) {
       callback('5FjWe31S_0g');
     } else {
       callback(json.items[0].id.videoId);
