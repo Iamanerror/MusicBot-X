@@ -197,14 +197,14 @@ client.on('message', async msg => { // eslint-disable-line
      
     if(msg.content.startsWith(`${prefix}helpmusic`)){
         var embedhelp = new Discord.RichEmbed()
-            .setTitle(`BlackfoxMusic Commands`)
-            .addField("^play [YouTube Link/Playlist]", "Usage: `^play` Description: To play See The YouTube Linke And playlist.", false)
-            .addField("^play [Suchbegriff(e)]", "Usage: `^play`<song name> Description: To play Music.", false)
-            .addField("^skip", "Usage: `^skip` Description: To skip music.", false)
-            .addField("^stop", "Usage: `^stop` Description: To Bot disconnected.", false)
-            .addField("^queue", "Usage: `^queue` Description: To Check The Queue List.", false)
-            .addField("^pause", "Usage: `^pause` Description: To pause The Current Playing Song.", false)
-            .addField("^resume", "Usage: `^resume` Description: To Resume The Paused Song.", false)
+            .setTitle(`Cryo Music Commands`)
+            .addField(">play [YouTube Link/Playlist]", "Usage: `>play` Description: To play See The YouTube Linke And playlist.", false)
+            .addField(">play [Suchbegriff(e)]", "Usage: `>play`<song name> Description: To play Music.", false)
+            .addField(">skip", "Usage: `>skip` Description: To skip music.", false)
+            .addField(">stop", "Usage: `>stop` Description: To Bot disconnected.", false)
+            .addField(">queue", "Usage: `>queue` Description: To Check The Queue List.", false)
+            .addField(">pause", "Usage: `>pause` Description: To pause The Current Playing Song.", false)
+            .addField(">resume", "Usage: `>resume` Description: To Resume The Paused Song.", false)
             .setColor([226, 50, 41])
             .setThumbnail(client.user.avatarURL)
             return msg.channel.sendEmbed(embedhelp);
