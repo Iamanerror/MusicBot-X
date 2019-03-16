@@ -20,7 +20,7 @@ let guilds = {};
 client.on('ready', function () {
   console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);
   const clientUser = client.user;
-  clientUser.setActivity('Nøøb Gamer', { type: 'PLAYING' });
+  clientUser.setActivity('music', { type: 'PLAYING' });
 });
 
 client.on('message', function (message) {
