@@ -8,12 +8,8 @@ const youtubeInfo = require('youtube-info');
 const dotenv = require('dotenv');
 dotenv.load();
 
-let config = require('./settings.json');
-
-const botToken = process.env.BOT_TOKEN;
-const youtubeAPIKey = process.env.YOUTUBE_API_KEY;
-const botMaster = process.env.BOT_MASTER;
-const prefix = config.prefix;
+const youtube = new YouTube(config.GOOGLE_API_KEY);
+const PREFIX = config.prefix;
 
 let guilds = {};
 
