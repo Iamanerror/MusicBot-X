@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const ytdl = require('ytdl-core');
 const request = require('request');
 const fs = require('fs');
-const getYoutubeID = require('get-youtube-id');
+const YouTube = require('simple-youtube-api');
 const youtubeInfo = require('youtube-info');
 const dotenv = require('dotenv');
 dotenv.load();
