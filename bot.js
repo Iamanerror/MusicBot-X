@@ -8,35 +8,61 @@ const client = new Client({ disableEveryone: true});
 const youtube = new YouTube(config.GOOGLE_API_KEY);
 const PREFIX = config.prefix;
 
-let guilds = {};
+const queue = new Map();
 
-client.on('ready', function () {
-  console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);
-  const clientUser = client.user;
-  clientUser.setActivity('music', { type: 'PLAYING' });
-});
+client.on('warn', console.warn);
 
-client.on('message', function (message) {
-  const member = message.member;
-  const msg = message.content.toLowerCase();
-  const args = message.content.split(' ').slice(1).join(' ');
+client.on('error', console.error);
 
-  if (!guilds[message.guild.id]) {
-    guilds[message.guild.id] = {
-      queue: [],
-      queueNames: [],
-      isPlaying: false,
-      dispatcher: null,
-      voiceChannel: null,
-      skipReq: 0,
-      skippers: [],
-    };
+client.on('ready', () => console.log('I am ready!'));
+
+client.on('disconnect', () => console.log('I disconnected!'));
+
+client.on('reconnecting', () => console.log('I am disconnecting!'));
+
+client.on('voiceStateUpdate', (oldMember, newMember) => {
+  let newUserChannel = newMember.voiceChannel
+  let oldUserChannel = oldMember.voiceChannel
+  const serverQueue = queue.get(oldMember.guild.id);
+
+
+  if(oldUserChannel === undefined && newUserChannel !== undefined) {
+      // User joines a voice channel
+  } else if(newUserChannel === undefined){
+
+    // User leaves a voice channel
+      if(oldMember.id === '514856260353392660'){
+          return console.log("BOT");
+      }
+      else{
+          if(client.guilds.get(oldMember.guild.id).voiceConnection != null){
+              if(client.guilds.get(oldMember.guild.id).voiceConnection.channel.id === oldUserChannel.id){
+                    if(oldUserChannel.members.size < 2){
+                        serverQueue.songs = [];
+                        serverQueue.connection.dispatcher.end('No members left in the channel!')
+                    }    
+              }else{
+                  return console.log('not in the same voice channel');
+              }
+          }else{
+              return undefined;
+          }
+      }
+         
+
   }
+})
 
-  if (message.author.equals(client.user) || message.author.bot) return;
+client.on('message', async msg => { // eslint-disable-line
+    if (msg.author.bot) return undefined;
+    if (!msg.content.startsWith(PREFIX)) return undefined;
+    const args = msg.content.split(' ');
+    const searchString = args.slice(1).join(' ');
+    const url = args[1];
+    const serverQueue = queue.get(msg.guild.id);
 
-  if (msg.startsWith(prefix + 'play')) {
-    if (member.voiceChannel || guilds[message.guild.id].voiceChannel != null) {
+    if(msg.content.startsWith(`${PREFIX}play`)){
+     if (member.voiceChannel || guilds[message.guild.id].voiceChannel != null) {
       if (guilds[message.guild.id].queue.length > 0 || guilds[message.guild.id].isPlaying) {
         getID(args, function (id) {
           addToQueue(id, message);
